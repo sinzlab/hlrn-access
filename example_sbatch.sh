@@ -8,4 +8,4 @@
 #SBATCH --time=60
 
 module load singularity
-singularity exec --nv --env-file=<path_to_env_file> --bind <host-dir>:<contianer-dir> <singulairty-image.sif> <commannd_to_run>
+singularity exec --nv --env-file=<path_to_env_file> --bind /home/$USER/.vscode-server:/.vscode-server,<host-dir>:<contianer-dir> <singulairty-image.sif> <commannd_to_run>
