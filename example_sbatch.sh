@@ -3,9 +3,8 @@
 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=1M
-#SBATCH --gpus=1
-#SBATCH --time=60
+#SBATCH --partition=grete:shared
+#SBATCH --gpus 1
 
 module load singularity
-singularity exec --nv --env-file=<path_to_env_file> --bind /home/$USER/.vscode-server:/.vscode-server,<host-dir>:<contianer-dir> <singulairty-image.sif> <commannd_to_run>
+singularity instance start --nv --bind /home/$USER/.vscode-server:/.vscode-server,/home/$USER/hlrn_access/example_data:/example_data singularity_example.sif example_instance
