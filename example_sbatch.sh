@@ -7,4 +7,5 @@
 #SBATCH --gpus 1
 
 module load singularity
-singularity instance start --nv --bind /home/$USER/.vscode-server:/.vscode-server,/home/$USER/hlrn_access/example_data:/example_data singularity_example.sif example_instance
+singularity instance start --nv --bind /home/$USER/.vscode-server:/.vscode-server,/home/$USER/hlrn-access/example_data:/example_data singularity/singularity_example.sif example_instance
+sleep infinity
