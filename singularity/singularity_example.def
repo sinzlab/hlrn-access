@@ -11,7 +11,8 @@ From: pytorch/pytorch:1.10.0-cuda11.3-cudnn8-runtime
     apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         build-essential \
-        git 
+        git \
+        curl
 
     # add python package that you need here
     pip install --no-cache-dir \
