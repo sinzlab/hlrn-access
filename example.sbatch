@@ -6,6 +6,7 @@
 #SBATCH --gpus 1                    # number of gpus per node
 
 module load singularity
-singularity instance start --nv --bind /home/$USER/.vscode-server:/.vscode-server,/home/$USER/hlrn-access/example_data:/example_data singularity/singularity_example.sif example_instance
+# note: if you start your instance from your home directory the whole home directory will always be mounted into your instance (even with --no-home) 
+singularity instance start --nv --bind /home/USER/.vscode−server:/.vscode−server,/home/USER/.vscode-server:/.vscode-server,/home/USER/hlrn-access/example_data:/example_data singularity/singularity_example.sif example_instance
 # keep the instance and job running since you want to connect to it with ssh and develop in the container
 sleep infinity
