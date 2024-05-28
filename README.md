@@ -24,6 +24,7 @@ Once in the server, to test its functionality you can follow the the tutorial av
 There are essentially **two** ways to use the HLRN cluster
 1. build a singularity/apptainer image, run it, ssh into the container on a compute node
 2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
+3. 
 Both ways are described step by step in the following:
 
 # 1. Using the nodes with singularity
