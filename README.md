@@ -20,7 +20,7 @@ With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i
 ## Testing the servers
 Once in the server, to test its functionality you can follow the the tutorial available in https://gitlab-ce.gwdg.de/dmuelle3/deep-learning-with-gpu-cores. 
 
-## Using the the servers
+## Using the servers
 There are essentially **two** ways to use the HLRN cluster
 1. build a singularity/apptainer image, run it, ssh into the container on a compute node
 2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
