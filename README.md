@@ -24,6 +24,7 @@ Once in the server, to test its functionality you can follow the the tutorial av
 There are essentially **two** ways to use the HLRN cluster
 1. build a singularity/apptainer image, run it, ssh into the container on a compute node
 2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
+Both ways are described step by step in the following:
 
 # 1. Using the nodes with singularity
 
@@ -69,7 +70,7 @@ Once the singularity image is built, upload the image (`.sif` file) to the login
 # 2. Using the nodes with a conda environment
 
 ### Install mamba and set up your environment
-Follow the guide provided by Anwai Archit (here)[https://docs.hpc.gwdg.de/software/hlrn_tmod/devtools_compiler_debugger/conda/index.html#setting-up-mamba] and install mamba in `/scratch/usr/$USER/mambaforge`. After this, set up your environment with all the libraries that you require. This can be done on the login node of the HLRN. However, be aware that you have to install mamba and set up your environment at the right `/scratch` directory (i.e. use login node `glogin9` for gpu nodes, `glogin1-glogin8` for cpu nodes).
+Follow the guide provided by Anwai Archit [here](https://docs.hpc.gwdg.de/software/hlrn_tmod/devtools_compiler_debugger/conda/index.html#setting-up-mamba) and install mamba in `/scratch/usr/$USER/mambaforge`. After this, set up your environment with all the libraries that you require. This can be done on the login node of the HLRN. However, be aware that you have to install mamba and set up your environment at the right `/scratch` directory (i.e. use login node `glogin9` for gpu nodes, `glogin1-glogin8` for cpu nodes).
 
 ### Setup vscode on your local machine
 Three steps: 
