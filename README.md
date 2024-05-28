@@ -20,8 +20,12 @@ With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i
 ## Testing the servers
 Once in the server, to test its functionality you can follow the the tutorial available in https://gitlab-ce.gwdg.de/dmuelle3/deep-learning-with-gpu-cores. 
 
+## Using the the servers
+There are essentially **two** ways to use the HLRN cluster
+1. build a singularity/apptainer image, run it, ssh into the container on a compute node
+2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
 
-## Using the nodes with singularity, vscode and slurm
+# 1. Using the nodes with singularity
 
 At the moment these instructions work with Linux and Mac. It is not tested on Windows.
 
@@ -62,4 +66,33 @@ Once the singularity image is built, upload the image (`.sif` file) to the login
 
 (2) You can now directly `remote ssh` into the instance running on the GPU node via vscode locally. In order to do this, open the `Command pallete` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node within your singularity instance.
 
+# 2. Using the nodes with a conda environment
+
+### Install mamba and set up your environment
+Follow the guide provided by Anwai Archit (here)[https://docs.hpc.gwdg.de/software/hlrn_tmod/devtools_compiler_debugger/conda/index.html#setting-up-mamba] and install mamba in `/scratch/usr/$USER/mambaforge`. After this, set up your environment with all the libraries that you require. This can be done on the login node of the HLRN. However, be aware that you have to install mamba and set up your environment at the right `/scratch` directory (i.e. use login node `glogin9` for gpu nodes, `glogin1-glogin8` for cpu nodes).
+
+### Setup vscode on your local machine
+Three steps: 
+
+(1) Install vscode https://code.visualstudio.com on your local machine; 
+
+(2) Install the extension `Remote - SSH`: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh; 
+
+(3) `ssh` into the login node `glogin9` via vscode. In order to do this, add a config file (a template `config` is provided in the repo `conda`) under `~/.ssh/config` and ssh into the login node via the `Command pallete` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host...". Please add both the entries as in the `config` file provided, i.e., "Host hlrn ..." as well as "Host hlrn-*".
+
+Doing this creates a `.vscode-server` folder on the login node that you will need to use the vscode frontend on your local machine and to develop on the assigned GPU compute note on the cluster.
+
+### Submit a job to slurm
+The last step is to submit a job to slurm and remote-ssh into the compute node via vscode
+
+(1) Use the `conda/example.sbatch` file that is provided and adjust it to your needs. Afterwards, submit your job to slurm by `sbatch example.sbatch`. You can check the status of the slurm job and your allocated compute node with `squeue --me`.
+
+(2) You can now directly `remote ssh` into the compute node via vscode locally. In order to do this, open the `Command pallete` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node.
+
+(3) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel. 
+
+*We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
+
+
 *Credits to Pedro Costa Klein for helping create this document.*
+

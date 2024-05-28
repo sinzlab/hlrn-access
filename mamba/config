@@ -1,0 +1,12 @@
+
+Host hlrn
+    User <user>
+    HostName glogin9.hlrn.de
+    IdentityFile <path_to_your_private_key>
+
+Host hlrn-*
+    User <user>
+    IdentityFile <path_to_your_private_key>
+    RequestTTY force
+    Port 22
+    ProxyCommand ssh $(echo %h | cut -d- -f1) nc $(echo %h | cut -d- -f2) %p
