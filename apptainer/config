@@ -10,4 +10,4 @@ Host hlrn-*
     RequestTTY force
     Port 22
     ProxyCommand ssh $(echo %h | cut -d- -f1) nc $(echo %h | cut -d- -f2) %p
-    RemoteCommand module load singularity; singularity shell instance://example_instance  
+    RemoteCommand module load apptainer; apptainer shell instance://example_instance
