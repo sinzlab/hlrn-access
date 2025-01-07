@@ -12,19 +12,19 @@ The NHR/HLRN HPC consists in a cluster of processing nodes, to which users can s
 **Warning**: The websites and documentations related to NHR are being updated constantly. So, if the instructions presented here doesn't work, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html).
 
 ### New
-If you already have a GWDG account, just ask Fabian to give you access to one of his projects using the [Project Portal](https://docs.hpc.gwdg.de/project_management/project_portal/index.html). If you don't have a GWDG account, there are two options: (1) send an email to _nhr-support@gwdg.de_ asking for a test account (for more info, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html)). (2) Send an email to _hpc@gwdg.de_ with Fabian in CC mentioning the institute you will be working at and a short description/working title of your thesis/project as well as the duration of the project (for more information, please refer to [this link](https://docs.hpc.gwdg.de/start_here/getting_an_account/index.html#scientific-compute-cluster-scc)).
+If you already have a full GWDG account, just ask Fabian to give you access to one of his projects using the [Project Portal](https://docs.hpc.gwdg.de/project_management/project_portal/index.html). If you don't have a GWDG account, there are two options: (1) send an email to _nhr-support@gwdg.de_ asking for a test account (for more info, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html)). (2) Send an email to _hpc@gwdg.de_ with Fabian in CC mentioning the institute you will be working at and a short description/working title of your thesis/project as well as the duration of the project (for more information, please refer to [this link](https://docs.hpc.gwdg.de/start_here/getting_an_account/index.html#scientific-compute-cluster-scc)).
+Option (2) is preferred for users who already have a student (e.g. students of the University of Göttingen) or guest account on AcademicCloud.
 
 ### Old
-
 Please apply for an account here: https://www.hlrn.de/doc/display/PUB/Apply+for+a+User+Account.
 
 You will also receive an e-mail with a PIN and username. Please store this PIN safely, since it is used to set your initial password when your application is accepted.
 
 ## Accessing the servers
 
-The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the HLRN portal: [https://www.hlrn.de/doc/display/PUB/SSH+Login](https://docs.hpc.gwdg.de/start_here/connecting/index.html). Notice that when you follow the instructions to upload an SSH key, you will receive an e-mail with the link to access the upload page, and you should upload just the _.pub_ file there.
+The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the AcademicCloud portal: [https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key]([https://docs.hpc.gwdg.de/start_here/connecting/index.html](https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key)).
 
-With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i <path_to_your_private_key> -l <your_username> glogin9.hlrn.de```. We recommend using `glogin9` instead of others because it allows you to access the `/scratch-grete/` directly from the assigned GPU compute node.
+With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i <path_to_your_private_key> -l <your_username> glogin9.hlrn.de```. We recommend using `glogin9` instead of others because it allows you to access the `/scratch-grete/` directly from the assigned GPU compute node. A project-specific login node can also be found on the details page of an assigned project on the [project portal](https://hpcproject.gwdg.de/)
 
 ## Testing the servers
 
