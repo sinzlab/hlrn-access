@@ -11,20 +11,14 @@ The NHR/HLRN HPC consists in a cluster of processing nodes, to which users can s
 
 **Warning**: The websites and documentations related to NHR are being updated constantly. So, if the instructions presented here doesn't work, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html).
 
-### New
 If you already have a full GWDG account, just ask Fabian to give you access to one of his projects using the [Project Portal](https://docs.hpc.gwdg.de/project_management/project_portal/index.html). It is important to login to the [AcademicCloud](https://academiccloud.de/) at least once to be able to use the [HPC Project Portal](https://hpcproject.gwdg.de/) or be added to projects.
 
 If you don't have a GWDG account, there are two options: (1) send an email to _nhr-support@gwdg.de_ asking for a test account (for more info, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html)). (2) Send an email to _hpc@gwdg.de_ with Fabian in CC mentioning the institute you will be working at and a short description/working title of your thesis/project as well as the duration of the project (for more information, please refer to [this link](https://docs.hpc.gwdg.de/start_here/getting_an_account/index.html#scientific-compute-cluster-scc)).
 Option (2) is preferred for users who already have a student (e.g. students of the University of Göttingen) or guest account on AcademicCloud.
 
-### Old
-Please apply for an account here: https://www.hlrn.de/doc/display/PUB/Apply+for+a+User+Account.
-
-You will also receive an e-mail with a PIN and username. Please store this PIN safely, since it is used to set your initial password when your application is accepted.
-
 ## Accessing the servers
 
-The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the AcademicCloud portal: [https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key]([https://docs.hpc.gwdg.de/start_here/connecting/index.html](https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key)).
+The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the AcademicCloud portal: [https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key](https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key).
 
 With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i <path_to_your_private_key> -l <your_username> glogin9.hlrn.de```. We recommend using `glogin9` instead of others because it allows you to access the `/scratch-grete/` directly from the assigned GPU compute node. A project-specific login node can also be found on the details page of an assigned project on the [project portal](https://hpcproject.gwdg.de/)
 
@@ -115,8 +109,5 @@ The last step is to submit a job to slurm and remote-ssh into the compute node v
 
 *We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
-## Storage on the servers
-
-Quotas are used to limit how much space and how many files users and projects can have in each data store. To see the quotas for any data stores your current user has access to, use the command ```show-quota``` (for more details, see [https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html)).
 
 *Credits to Pedro Costa Klein for helping create this document.*
