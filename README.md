@@ -115,5 +115,8 @@ The last step is to submit a job to slurm and remote-ssh into the compute node v
 
 *We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
+## Storage on the servers
+
+Quotas are used to limit how much space and how many files users and projects can have in each data store. To see the quotas for any data stores your current user has access to, use the command ```show-quota``` (for more details, see [https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html)).
 
 *Credits to Pedro Costa Klein for helping create this document.*
