@@ -11,20 +11,14 @@ The NHR/HLRN HPC consists in a cluster of processing nodes, to which users can s
 
 **Warning**: The websites and documentations related to NHR are being updated constantly. So, if the instructions presented here doesn't work, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html).
 
-### New
 If you already have a full GWDG account, just ask Fabian to give you access to one of his projects using the [Project Portal](https://docs.hpc.gwdg.de/project_management/project_portal/index.html). It is important to login to the [AcademicCloud](https://academiccloud.de/) at least once to be able to use the [HPC Project Portal](https://hpcproject.gwdg.de/) or be added to projects.
 
 If you don't have a GWDG account, there are two options: (1) send an email to _nhr-support@gwdg.de_ asking for a test account (for more info, please refer to [this link](https://docs.hpc.gwdg.de/start_here/nhr_application_process/index.html)). (2) Send an email to _hpc@gwdg.de_ with Fabian in CC mentioning the institute you will be working at and a short description/working title of your thesis/project as well as the duration of the project (for more information, please refer to [this link](https://docs.hpc.gwdg.de/start_here/getting_an_account/index.html#scientific-compute-cluster-scc)).
 Option (2) is preferred for users who already have a student (e.g. students of the University of Göttingen) or guest account on AcademicCloud.
 
-### Old
-Please apply for an account here: https://www.hlrn.de/doc/display/PUB/Apply+for+a+User+Account.
-
-You will also receive an e-mail with a PIN and username. Please store this PIN safely, since it is used to set your initial password when your application is accepted.
-
 ## Accessing the servers
 
-The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the AcademicCloud portal: [https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key]([https://docs.hpc.gwdg.de/start_here/connecting/index.html](https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key)).
+The password that you set is for the portal only. In order to access the nodes on the HLRN cluster, you need to have an SSH key uploaded to the AcademicCloud portal: [https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key](https://docs.hpc.gwdg.de/start_here/connecting/upload_ssh_key/index.html#upload-key).
 
 With the SSH key uploaded, you can now log into the cluster using ssh: ```ssh -i <path_to_your_private_key> -l <your_username> glogin9.hlrn.de```. We recommend using `glogin9` instead of others because it allows you to access the `/scratch-grete/` directly from the assigned GPU compute node. A project-specific login node can also be found on the details page of an assigned project on the [project portal](https://hpcproject.gwdg.de/)
 
@@ -38,7 +32,7 @@ There are essentially **two** ways to use the HLRN cluster
 1. build an apptainer (formerly singularity) image, run it, ssh into the container on a compute node
 2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
 
-Both ways are described step by step in the following:
+**Attention:** Make sure to run heavy scripts always on compute nodes and not login nodes (entry points after connection via ssh, normally named like `glogin10`). More information about the cluster organization can be found [here](https://docs.hpc.gwdg.de/how_to_use/cluster_overview/index.html#organization).
 
 # 1. Using the nodes with apptainer
 
@@ -103,17 +97,28 @@ Three steps:
 
 Doing this creates a `.vscode-server` folder on the login node that you will need to use the vscode frontend on your local machine and to develop on the assigned GPU compute note on the cluster.
 
-### Submit a job to slurm
+### 2.1 Submit an interactive job to slurm
 
-The last step is to submit a job to slurm and remote-ssh into the compute node via vscode
+One way for using the environment is to allocate a node via an interactive job (`srun`) to slurm. This is normally used for developing and debugging.
 
-(1) Use the `conda/example.sbatch` file that is provided and adjust it to your needs. Afterwards, submit your job to slurm by `sbatch example.sbatch`. You can check the status of the slurm job and your allocated compute node with `squeue --me`.
+(1) Use a command like this and adjust it to your needs: `srun --pty -p grete:interactive  -G 2g.10gb:1 /bin/bash`. More info about interactive use and GPU slicing can be found [here](https://docs.hpc.gwdg.de/how_to_use/slurm/gpu_usage/index.html#interactive-usage-and-gpu-slices-on-greteinteractive)
 
-(2) You can now directly `remote ssh` into the compute node via vscode locally. In order to do this, open the `Command palette` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node.
+(2) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel.
 
-(3) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel. 
+### 2.2 Submit a batch job to slurm
+
+Another way for using the environment is to submit a batch job (`sbatch`) to slurm. This is normally used for more stable scripts, that need less developing, debugging and testing.
+
+(1) Use the `conda/example.sbatch` file that is provided and adjust it to your needs. You can activate your enviromment within the sbatch file (`conda/mamba activate ...`), load modules (`module load ...`) and run for example python scripts (`py ./path/to/script.py`). More information can be found [here](https://docs.hpc.gwdg.de/how_to_use/slurm/index.html).
+
+(2) Submit your job to slurm by `sbatch example.sbatch`. You can check the status of the slurm job and your allocated compute node with `squeue --me`.
+
+You can also directly `remote ssh` into the compute node via vscode locally, where you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel. In order to do this, open the `Command palette` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node.
 
 *We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
+## Storage on the servers
+
+Quotas are used to limit how much space and how many files users and projects can have in each data store. To see the quotas for any data stores your current user has access to, use the command ```show-quota``` (for more details, see [https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html)).
 
 *Credits to Pedro Costa Klein for helping create this document.*
