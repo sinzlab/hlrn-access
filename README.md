@@ -32,7 +32,7 @@ There are essentially **two** ways to use the HLRN cluster
 1. build an apptainer (formerly singularity) image, run it, ssh into the container on a compute node
 2. set up a conda/mamba environment on your scratch, ssh into the compute node, activate your conda/mamba environment
 
-Both ways are described step by step in the following:
+**Attention:** Make sure to run heavy scripts always on compute nodes and not login nodes (entry points after connection via ssh, normally named like `glogin10`). More information about the cluster organization can be found [here](https://docs.hpc.gwdg.de/how_to_use/cluster_overview/index.html#organization).
 
 # 1. Using the nodes with apptainer
 
@@ -97,15 +97,23 @@ Three steps:
 
 Doing this creates a `.vscode-server` folder on the login node that you will need to use the vscode frontend on your local machine and to develop on the assigned GPU compute note on the cluster.
 
-### Submit a job to slurm
+### 2.1 Submit an interactive job to slurm
 
-The last step is to submit a job to slurm and remote-ssh into the compute node via vscode
+One way for using the environment is to allocate a node via an interactive job (`srun`) to slurm. This is normally used for developing and debugging.
 
-(1) Use the `conda/example.sbatch` file that is provided and adjust it to your needs. Afterwards, submit your job to slurm by `sbatch example.sbatch`. You can check the status of the slurm job and your allocated compute node with `squeue --me`.
+(1) Use a command like this and adjust it to your needs: `srun --pty -p grete:interactive  -G 2g.10gb:1 /bin/bash`. More info about interactive use and GPU slicing can be found [here](https://docs.hpc.gwdg.de/how_to_use/slurm/gpu_usage/index.html#interactive-usage-and-gpu-slices-on-greteinteractive)
 
-(2) You can now directly `remote ssh` into the compute node via vscode locally. In order to do this, open the `Command palette` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node.
+(2) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel.
 
-(3) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel. 
+### 2.2 Submit a batch job to slurm
+
+Another way for using the environment is to submit a batch job (`sbatch`) to slurm. This is normally used for more stable scripts, that need less developing, debugging and testing.
+
+(1) Use the `conda/example.sbatch` file that is provided and adjust it to your needs. You can activate your enviromment within the sbatch file (`conda/mamba activate ...`), load modules (`module load ...`) and run for example python scripts (`py ./path/to/script.py`). More information can be found [here](https://docs.hpc.gwdg.de/how_to_use/slurm/index.html).
+
+(2) Submit your job to slurm by `sbatch example.sbatch`. You can check the status of the slurm job and your allocated compute node with `squeue --me`.
+
+You can also directly `remote ssh` into the compute node via vscode locally, where you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel. In order to do this, open the `Command palette` on vscode (keyboard shortcut `cmd + ^ + p` on mac) by using the option "Remote-SSH: Connect to Host..." and type in `hlrn-<compute-node-name>` and hit enter. This should open a new vscode window on the compute node.
 
 *We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
