@@ -117,6 +117,10 @@ You can also directly `remote ssh` into the compute node via vscode locally, whe
 
 *We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
+### Cancel jobs
+
+You can (and should, in order not to strain the runtime quota unnecessarily) cancel jobs that are no longer required with `scancel [jobId]`, whereby the jobId can be determined with `squeue --me`.
+
 ## Storage on the servers
 
 Quotas are used to limit how much space and how many files users and projects can have in each data store. To see the quotas for any data stores your current user has access to, use the command ```show-quota``` (for more details, see [https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html)).
