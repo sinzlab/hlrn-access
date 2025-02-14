@@ -125,4 +125,6 @@ You can (and should, in order not to strain the runtime quota unnecessarily) can
 
 Quotas are used to limit how much space and how many files users and projects can have in each data store. To see the quotas for any data stores your current user has access to, use the command ```show-quota``` (for more details, see [https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/index.html)).
 
+In case you are running out of storage space, look with `du -h ./ -d 1` for files and folders with huge sizes.
+
 *Credits to Pedro Costa Klein for helping create this document.*
