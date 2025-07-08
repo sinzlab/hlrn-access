@@ -127,4 +127,6 @@ Quotas are used to limit how much space and how many files users and projects ca
 
 In case you are running out of storage space, look with `du -h ./ -d 1` for files and folders with huge sizes. For inodes, one can use `du --inodes -h ./ -d 1`.
 
+For more infos how to solve quota issues, have a look at the [documentation](https://docs.hpc.gwdg.de/how_to_use/the_storage_systems/quota/fixing_quota_issues/index.html).
+
 *Credits to Pedro Costa Klein for helping create this document.*
