@@ -71,7 +71,7 @@ Once the apptainer image is built, upload the image (`.sif` file) to the login n
 (1) create an `example.sbatch` file (see `example.sbatch` in this repo), 
 
 (2) use the `sbatch` command on the login node to run the `example.sbatch` file, for example: `sbatch example.sbatch`.
-*We recommend you familiarize yourself with slurm an slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
+*We recommend you familiarize yourself with slurm and slurm commands, which will help you see (a) what nodes are available, (b) how to check your running jobs, (c) how to read the output and logs, (d) how to change the sbatch file in order to customize your requirements (such as needing more GPU nodes), etc. Please see the slurm documentation page for more: https://slurm.schedmd.com.*
 
 ### Remote-ssh'ing into the assigned compute node
 
@@ -102,6 +102,10 @@ Doing this creates a `.vscode-server` folder on the login node that you will nee
 One way for using the environment is to allocate a node via an interactive job (`srun`) to slurm. This is normally used for developing and debugging.
 
 (1) Use a command like this and adjust it to your needs: `srun --pty -p grete:interactive  -G 2g.10gb:1 /bin/bash`. More info about interactive use and GPU slicing can be found [here](https://docs.hpc.gwdg.de/how_to_use/slurm/gpu_usage/index.html#interactive-usage-and-gpu-slices-on-greteinteractive)
+
+#### Observation
+
+Sometimes it is also convenient to create an `sbatch` script (or change the partition of the one you already have) to `grete:interactive`. This is useful when you have more complex configurations to start even an interactive job. Eg, if you need to bind folder(s) that are not in your home, such as datasets.
 
 (2) Now you can activate your conda environment in the vscode terminal and run scripts, use the vscode debugger or work with jupyter notebooks by choosing your environment as the respective kernel.
 
